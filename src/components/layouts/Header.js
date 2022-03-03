@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components"
+import {styled} from '@mui/system';
 import Link from "next/link";
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -8,15 +8,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import {makeStyles} from "@material-ui/core/styles"; // styles 기능 추가
+
 
 const Header = () => {
+
   return (
     <Box sx={{
       flexGrow: 1,
-      // backdrop-filter: 'saturate(180%) blur(15px)',
-      // background: 'rgba(255, 255, 255, 0.1)',
     }}>
-      <AppBar position="static">
+      <Test>
         <Toolbar>
           <IconButton
             size="large"
@@ -34,16 +35,17 @@ const Header = () => {
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
-      </AppBar>
+      </Test>
     </Box>
-  )
+  );
+};
 
-}
-
-// const HeaderBox = styled.div`
-//   backdrop-filter: saturate(180%) blur(15px);
-//   background: rgba(255, 255, 255, 0.1);
-//   background-color: red;
-// `
+const Test = styled(AppBar)({
+  color: 'darkslategray',
+  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  padding: 8,
+  borderRadius: 4,
+  backdropFilter: 'saturate(180%) blur(15px)',
+});
 
 export default Header;

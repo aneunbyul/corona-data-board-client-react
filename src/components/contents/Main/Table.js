@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {DataGrid} from '@mui/x-data-grid';
+import faker from 'faker';
+
+console.log(faker.internet.email());
 
 const columns = [
   {field: 'id', headerName: 'ID', width: 70},

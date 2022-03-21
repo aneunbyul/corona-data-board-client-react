@@ -33,7 +33,11 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             CORONA DATA BOARD
           </Typography>
-          <Button color="inherit">Login</Button>
+
+          <Link href={'/sign-up'}>
+            <Button color="inherit">Sign up</Button>
+          </Link>
+          <Button color="inherit">Sign in</Button>
         </Toolbar>
       </Test>
     </Box>
@@ -46,6 +50,7 @@ const Test = styled(AppBar)({
   padding: 8,
   borderRadius: 4,
   backdropFilter: 'saturate(180%) blur(15px)',
+  position: 'relative'
 });
 
 export default Header;

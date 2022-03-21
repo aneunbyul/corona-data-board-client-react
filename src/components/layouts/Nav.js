@@ -12,13 +12,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import styled from "styled-components";
 
 const drawerWidth = 240;
 
 const Nav = () => {
   return (
     <>
-      <Box sx={{display: 'flex'}}>
+      <NabContainer sx={{display: 'flex', position: 'relative'}}>
         <Drawer
           sx={{
             width: drawerWidth,
@@ -27,6 +28,7 @@ const Nav = () => {
             '& .MuiDrawer-paper': {
               width: drawerWidth,
               boxSizing: 'border-box',
+              position: 'relative'
             },
           }}
           variant="permanent"
@@ -78,9 +80,13 @@ const Nav = () => {
             ))}
           </List>
         </Drawer>
-      </Box>
+      </NabContainer>
     </>
   );
 };
 
+
+const NabContainer = styled(Box)({
+  position: 'relative'
+});
 export default Nav;

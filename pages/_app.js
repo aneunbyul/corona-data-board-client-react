@@ -1,13 +1,15 @@
 import '../styles/globals.css'
 import {ThemeProvider} from "styled-components";
 import Layout from "../src/components/layouts/Layout";
+import {RecoilRoot} from "recoil";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({Component, pageProps}) {
   return (
-
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <RecoilRoot>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </RecoilRoot>
   )
 }
 

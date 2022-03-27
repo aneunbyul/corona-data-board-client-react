@@ -8,16 +8,19 @@ import {createContext} from "react";
 import Grid from "@mui/material/Grid";
 import AppBar from "@mui/material/AppBar";
 import Box from '@mui/material/Box'
+import {RecoilRoot} from "recoil";
 
 const Layout = ({children}) => {
   return (
     <>
-      <Header/>
-      <Container sx={{display: 'flex'}}>
-        <Nav/>
-        <main>{children}</main>
-      </Container>
-      <Footer/>
+      <RecoilRoot>
+        <Header/>
+        <Container sx={{display: 'flex'}}>
+          <Nav/>
+          <main>{children}</main>
+        </Container>
+        <Footer/>
+      </RecoilRoot>
     </>
   );
 };

@@ -8,11 +8,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {makeStyles} from "@material-ui/core/styles"; // styles 기능 추가
+import {makeStyles} from "@material-ui/core/styles";
+import {atom, useRecoilState, useRecoilValue} from "recoil";
+import {Container} from "@mui/material"; // styles 기능 추가
+import SignUpForm from "../contents/SignUp/SignUpForm";
 
+import {idState} from '../contents/SignUp/atoms'
 
 const Header = () => {
 
+  const idValue = useRecoilValue(idState)
   return (
     <Box sx={{
       flexGrow: 1,
@@ -33,11 +38,15 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
             CORONA DATA BOARD
           </Typography>
+          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+            {idValue}님 환영합니다
+          </Typography>
 
           <Link href={'/sign-up'}>
             <Button color="inherit">Sign up</Button>
           </Link>
           <Button color="inherit">Sign in</Button>
+
         </Toolbar>
       </Test>
     </Box>

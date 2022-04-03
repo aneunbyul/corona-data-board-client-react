@@ -45,7 +45,10 @@ const Header = () => {
           <Link href={'/sign-up'}>
             <Button color="inherit">Sign up</Button>
           </Link>
+
+          <Link href={'/sign-in'}>
           <Button color="inherit">Sign in</Button>
+          </Link>
 
         </Toolbar>
       </Test>

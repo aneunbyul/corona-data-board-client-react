@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import faker from 'faker';
+import axios from "axios";
 
 console.log(faker.internet.email());
 
@@ -38,6 +39,19 @@ const rows = [
 ];
 
 const Table = () => {
+
+  function onLoggin() {
+    axios({
+      method: "GET",
+      url: 'https://api.odcloud.kr/api/15085950/v1/uddi:bcbb84bc-2392-42ef-b48e-a6cedb2efce4?page=1&perPage=10',
+    }).then((res) => {
+      console.log(res);
+    }).catch(error => {
+      console.log(error);
+      throw new Error(error);
+    });
+  }
+
   return (
     <div style={{height: 400, width: '100%'}}>
       <DataGrid

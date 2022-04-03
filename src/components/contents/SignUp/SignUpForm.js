@@ -5,8 +5,16 @@ import {Container, Stack, TextField, Typography} from "@mui/material";
 import {Box} from "@mui/system";
 import {atom, useRecoilState, useRecoilValue} from "recoil";
 import {idState} from './atoms'
+import axios from "axios";
 
 const SignUpForm = () => {
+
+
+  axios.get('https://api.odcloud.kr/api/15085950/v1/uddi:bcbb84bc-2392-42ef-b48e-a6cedb2efce4?page=1&perPage=10').then((Response) => {
+    console.log('aaaa' + Response.data);
+  }).catch((Error) => {
+    console.log(Error);
+  })
 
   // const idValue = useRecoilValue(idState)
 

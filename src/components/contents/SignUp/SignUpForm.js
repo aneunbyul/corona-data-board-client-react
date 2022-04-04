@@ -1,50 +1,56 @@
-import * as React from 'react';
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid';
-import {Container, Stack, TextField, Typography} from "@mui/material";
-import {Box} from "@mui/system";
-import {atom, useRecoilState, useRecoilValue} from "recoil";
-import {idState} from './atoms'
-import axios from "axios";
+import React from "react";
+import ReactDOM from "react-dom";
+import {
+  BlobProvider,
+  Document,
+  Page,
+  StyleSheet,
+  Text,
+  View
+} from "@react-pdf/renderer";
+import PSPDFKit from "./PSPDFKit";
 
-const SignUpForm = () => {
 
+// Create styles
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4"
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1
+  }
+});
 
-  axios.get('https://api.odcloud.kr/api/15085950/v1/uddi:bcbb84bc-2392-42ef-b48e-a6cedb2efce4?page=1&perPage=10').then((Response) => {
-    console.log('aaaa' + Response.data);
-  }).catch((Error) => {
-    console.log(Error);
-  })
+// Create Document Component
+const MyDocument = (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <Text>Hello World!</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>We're inside a PDF!</Text>
+      </View>
+    </Page>
+  </Document>
+);
 
-  // const idValue = useRecoilValue(idState)
+ReactDOM.render(
+  <BlobProvider document={MyDocument}>
+    {({blob, url, loading, error}) => {
+      if (blob) {
+        return <PSPDFKit blob={blob}/>;
+      }
 
-  const [idValue, setIdValue] = useRecoilState(idState);
+      if (error) {
+        return error;
+      }
 
-  const onChange = (event) => {
-    setIdValue(event.target.value);
-  };
-
-  return (
-    <Container>
-      <Stack direction={"row"}>
-        <Typography>아이디</Typography>
-        <TextField id="standard-basic" label="아이디 입력" variant="standard" value={idValue} onChange={onChange}/>
-      </Stack>
-      <Stack direction={"row"}>
-        <Typography>비밀번호</Typography>
-        <TextField id="standard-basic" label="비밀번호 입력" variant="standard"/>
-      </Stack>
-      <Stack direction={"row"}>
-        <Typography>비밀번호 확인</Typography>
-        <TextField id="standard-basic" label="비밀번호 입력" variant="standard"/>
-      </Stack>
-      <Button variant="contained">회원가입</Button>
-
-      <div>
-        {idValue}님 환영합니다
-      </div>
-    </Container>
-  );
-}
-
-export default SignUpForm
+      return <div>The PDF is rendering...</div>;
+    }}
+  </BlobProvider>,
+  document.getElementById("root")
+);

@@ -1,7 +1,9 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import faker from 'faker';
 import axios from "axios";
+import {Button} from "@mui/material";
 
 console.log(faker.internet.email());
 
@@ -39,21 +41,54 @@ const rows = [
 ];
 
 const Table = () => {
+  const [data, setData] = useState(null);
 
-  function onLoggin() {
-    axios({
-      method: "GET",
-      url: 'https://api.odcloud.kr/api/15085950/v1/uddi:bcbb84bc-2392-42ef-b48e-a6cedb2efce4?page=1&perPage=10',
-    }).then((res) => {
-      console.log(res);
-    }).catch(error => {
-      console.log(error);
-      throw new Error(error);
-    });
-  }
+  const serviceKey = "star"; // 서비스키 입력
+
+  /* 아래는 쿼리 변수들로 차후 입력받을 예정 */
+
+  const [numOfRows, setRows] = useState(10);
+  const [pageNo, setPageNo] = useState(1);
+
+  const [startCreateDt, setStartCreateDt] = useState(() => {
+    let date = new Date();
+    // date.setDate(date.getDate() - 1);
+    const result = date.toISOString().slice(0, 10).replace(/[-]/g, '');
+    return result;
+  });
+
+  const [endCreateDt, setEndCreateDt] = useState(() => {
+    let date = new Date();
+    const result = date.toISOString().slice(0, 10).replace(/[-]/g, '');
+    return result;
+  });
+
+  const url = `/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&startCreateDt=${startCreateDt}&endCreateDt=${endCreateDt}`;
+
+
+  const onClick = async () => {
+    try {
+      const response = await axios(url, {
+        method: 'GET',
+        mode: 'no-cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/xml; charset=utf-8',
+        },
+        withCredentials: true,
+        credentials: 'same-origin',
+      });
+
+      setData(response.data);
+
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div style={{height: 400, width: '100%'}}>
+      <Button onClick={onClick}>데이터 불러오기</Button>
       <DataGrid
         rows={rows}
         columns={columns}

@@ -38,31 +38,6 @@ const SignInForm = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  //
-  // //fake server로 보낸 로그인 데이터
-  // function onLoggin() {
-  //   const email = document.getElementById("email");
-  //   const password = document.getElementById('password')
-  //   axios({
-  //     method: "POST",
-  //     url: 'https://reqres.in/api/login',
-  //     data: {
-  //       "email": email.value,
-  //       "password": password.value
-  //     }
-  //   }).then((res) => {
-  //     console.log(res);
-  //     const accessToken = res.data.token;
-  //
-  //     //쿠키에 토큰 저장
-  //     setCookie("is_login", `${accessToken}`);
-  //     document.location.href = "/";
-  //   }).catch(error => {
-  //     console.log(error);
-  //     throw new Error(error);
-  //   });
-  // }
-
 
   return (
     <Container sx={{

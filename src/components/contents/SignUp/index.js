@@ -4,12 +4,13 @@ import Grid from '@mui/material/Grid';
 import {TextField} from "@mui/material";
 import SignUpForm from "./SignUpForm";
 import {RecoilRoot} from "recoil";
+import {useState} from "react";
 
 const SignUp = () => {
   return (
     <>
       <RecoilRoot>
-      <SignUpForm/>
+        <SignUpForm/>
       </RecoilRoot>
     </>
   );
